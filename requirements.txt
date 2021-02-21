@@ -6,3 +6,9 @@ py==1.10.0
 pyparsing==2.4.7
 pytest==6.2.2
 toml==0.10.2
+llvmlite==0.31.0
+more-itertools==8.5.0
+cython
+numpy==1.19.1
+numba==0.51.2
+
