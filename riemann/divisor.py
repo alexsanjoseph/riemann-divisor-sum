@@ -2,7 +2,8 @@
 '''Compute the sum of divisors of a number.'''
 import math
 from numba import njit
-
+from riemann.database import RiemannDivisorSum
+from typing import List
 
 @njit
 def divisor_sum(n: int) -> int:
@@ -21,3 +22,22 @@ def divisor_sum(n: int) -> int:
         i += 1
 
     return the_sum
+
+@njit
+def witness_value(n: int, precomputed_divisor_sum=None) -> float:
+    denominator = n * math.log(math.log(n))
+    ds = precomputed_divisor_sum or divisor_sum(n)
+    return ds / denominator
+
+
+def compute_riemann_divisor_sums(start_n: int,
+                                 end_n: int) -> List[RiemannDivisorSum]:
+    '''Compute a batch of divisor sums.'''
+    output = [None] * (end_n - start_n + 1)
+
+    for n in range(start_n, end_n + 1):
+        ds = divisor_sum(n)
+        wv = witness_value(n, precomputed_divisor_sum=ds)
+        output[n - start_n] = RiemannDivisorSum(n=n, divisor_sum=ds, witness_value=wv)
+
+    return output
