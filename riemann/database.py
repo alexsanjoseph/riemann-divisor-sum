@@ -4,14 +4,7 @@ from abc import ABC
 from abc import abstractmethod
 from dataclasses import dataclass
 from typing import List
-
-
-@dataclass(frozen=True)
-class RiemannDivisorSum:
-    n: int
-    divisor_sum: int
-    witness_value: float
-
+from riemann.types import RiemannDivisorSum
 
 @dataclass(frozen=True)
 class SummaryStats:
