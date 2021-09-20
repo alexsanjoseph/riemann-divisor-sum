@@ -12,4 +12,4 @@ cython
 numpy
 numba
 hypothesis
-
+autopep8
