@@ -2,19 +2,15 @@ from functools import reduce
 from numba import jit
 from numba import njit
 from riemann.primes import primes
+from riemann.types import Partition
+from riemann.types import PrimeFactorization
 from riemann.types import RiemannDivisorSum
 from typing import List
-from typing import Tuple
 import math
-import numba as nb
-
-
-PrimeFactorization = nb.typed.List[nb.typed.List[int, int]]
-Partition = nb.typed.List[int]
 
 
 @njit
-def partitions_of_n(n: int) -> nb.typed.List[Partition]:
+def partitions_of_n(n: int) -> List[Partition]:
     '''Compute all partitions of an integer n.'''
     p = [0] * n
     k = 0
@@ -45,7 +41,7 @@ def partitions_of_n(n: int) -> nb.typed.List[Partition]:
     return output
 
 
-@jit
+@njit
 def partition_to_prime_factorization(
         partition: Partition) -> PrimeFactorization:
     return [(primes[i], exp) for (i, exp) in enumerate(partition)]
@@ -60,7 +56,7 @@ def prime_factor_divisor_sum(prime_factors: PrimeFactorization) -> int:
 
     divisor_sum = 1
     for (prime, exponent) in prime_factors:
-        divisor_sum *= int((prime ** (exponent + 1) - 1) / (prime - 1))
+        divisor_sum *= int((prime**(exponent + 1) - 1) / (prime - 1))
 
     return divisor_sum
 

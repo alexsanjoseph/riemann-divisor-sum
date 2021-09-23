@@ -43,6 +43,7 @@ def test_partitions_of_n_size(test_input, expected):
 @st.composite
 def prime_factorization(draw):
     '''Draw a random prime factorization.
+
     This function is a bit finnicky because when the number whose
     prime factorization is chosen here is too large, then the
     test either slows to a crawl (because it's computing a naive
