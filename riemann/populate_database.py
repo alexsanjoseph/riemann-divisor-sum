@@ -8,6 +8,11 @@ from riemann.search_strategy import search_strategy_by_name
 from riemann.sqlite_database import SqliteDivisorDb
 from riemann.types import SearchMetadata
 from riemann.types import SearchState
+from numba.core.errors import NumbaDeprecationWarning, NumbaPendingDeprecationWarning
+import warnings
+
+warnings.simplefilter('ignore', category=NumbaDeprecationWarning)
+warnings.simplefilter('ignore', category=NumbaPendingDeprecationWarning)
 
 DEFAULT_BATCH_SIZE = 250000
 

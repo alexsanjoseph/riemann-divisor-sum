@@ -76,7 +76,9 @@ class SqliteDivisorDb(DivisorDb, SearchMetadataDb):
             SELECT
                 max(n) as largest_computed_n,
                 max(witness_value) as largest_witness_value
-            FROM RiemannDivisorSums;
+            FROM RiemannDivisorSums
+            WHERE n > 5040
+            ;
         ''')
 
         max_n, max_witness = cursor.fetchone()

@@ -74,8 +74,8 @@ class TestDatabase:
     def test_summarize_nonempty(self, newDatabase):
         db: DivisorDb = newDatabase()
         records = [
-            RiemannDivisorSum(n=9, divisor_sum=3, witness_value=3),
-            RiemannDivisorSum(n=4, divisor_sum=4, witness_value=4),
+            RiemannDivisorSum(n=50510, divisor_sum=3, witness_value=3),
+            RiemannDivisorSum(n=5150, divisor_sum=4, witness_value=4),
         ]
         db.upsert(records)
         expected = SummaryStats(largest_computed_n=records[0],
